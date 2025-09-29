@@ -1,0 +1,15 @@
+
+## Guide Line ##
+
+Project Structure
+(Navigation + ViewModel)
+
+1. Navigation : 비즈니스 로직과 상태관리
+2. ViewModel : 이벤트 처리 및 화면 전환
+
+
+<생명주기 동기화 예시>
+화면 생성 → ViewModel 생성
+화면 활성 → ViewModel 활성
+화면 백스택 → ViewModel 유지
+화면 제거 → ViewModel.onCleared() 호출
