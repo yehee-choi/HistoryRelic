@@ -1,5 +1,6 @@
 package com.example.app_project.presentation.login
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,10 +11,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app_project.R  // 이 부분 수정
 import com.example.app_project.presentation.login.LoginState
 
 // 색상 정의
@@ -87,20 +90,20 @@ fun LoginScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(bottom = 64.dp)
             ) {
+
                 Box(
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(150.dp)
                         .background(
-                            color = PrimaryColor,
+                            color =BackgroundColor,
                             shape = RoundedCornerShape(20.dp)
                         ),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = "LOGO",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
+                    Image(
+                        painter = painterResource(id = R.drawable.logo),
+                        contentDescription = "앱 로고",
+                        modifier = Modifier.size(130.dp) // 필요에 따라 크기 조절
                     )
                 }
 
@@ -180,53 +183,53 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(48.dp))
 
-            // 또는 구분선
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Divider(
-                    modifier = Modifier.weight(1f),
-                    color = Color(0xFFE5E7EB),
-                    thickness = 1.dp
-                )
-                Text(
-                    text = "또는",
-                    fontSize = 14.sp,
-                    color = SubtleColor
-                )
-                Divider(
-                    modifier = Modifier.weight(1f),
-                    color = Color(0xFFE5E7EB),
-                    thickness = 1.dp
-                )
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // 이메일로 로그인 버튼
-            OutlinedButton(
-                onClick = onEmailLoginClick,
-                enabled = loginState !is LoginState.Loading,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = PrimaryColor
-                ),
-                border = androidx.compose.foundation.BorderStroke(
-                    1.dp,
-                    PrimaryColor
-                )
-            ) {
-                Text(
-                    text = "이메일로 로그인",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            }
+//            // 또는 구분선
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                verticalAlignment = Alignment.CenterVertically,
+//                horizontalArrangement = Arrangement.spacedBy(16.dp)
+//            ) {
+//                Divider(
+//                    modifier = Modifier.weight(1f),
+//                    color = Color(0xFFE5E7EB),
+//                    thickness = 1.dp
+//                )
+//                Text(
+//                    text = "또는",
+//                    fontSize = 14.sp,
+//                    color = SubtleColor
+//                )
+//                Divider(
+//                    modifier = Modifier.weight(1f),
+//                    color = Color(0xFFE5E7EB),
+//                    thickness = 1.dp
+//                )
+//            }
+//
+//            Spacer(modifier = Modifier.height(32.dp))
+//
+//            // 이메일로 로그인 버튼
+//            OutlinedButton(
+//                onClick = onEmailLoginClick,
+//                enabled = loginState !is LoginState.Loading,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(56.dp),
+//                shape = RoundedCornerShape(12.dp),
+//                colors = ButtonDefaults.outlinedButtonColors(
+//                    contentColor = PrimaryColor
+//                ),
+//                border = androidx.compose.foundation.BorderStroke(
+//                    1.dp,
+//                    PrimaryColor
+//                )
+//            ) {
+//                Text(
+//                    text = "이메일로 로그인",
+//                    fontSize = 16.sp,
+//                    fontWeight = FontWeight.Medium
+//                )
+//            }
         }
 
         // 푸터

@@ -2,7 +2,6 @@ package com.example.app_project.data.model
 
 import java.util.*
 
-
 // 대시보드용 간단한 유물 클래스 (사진, 이름, 시기만)
 data class DashboardArtifact(
     val id: String,
@@ -73,7 +72,7 @@ fun DetailApiResponse.toArtifactDetail(): ArtifactDetail? {
         null
     }
 }
-
+//NullSatety
 // DetailInfoItem을 ArtifactDetail로 변환
 fun DetailInfoItem.toArtifactDetail(): ArtifactDetail {
     return ArtifactDetail(
@@ -85,10 +84,12 @@ fun DetailInfoItem.toArtifactDetail(): ArtifactDetail {
         museumName = item.museumName2,
         nationalityName = "${item.nationalityName1} ${item.nationalityName2}".trim(),
         purposeName = item.purposeName,
-        relatedArtifact = RelatedArtifactInfo(
-            id = related.reltId,
-            name = related.reltRelicName,
-            museumName = related.reltMuseumFullName
-        )
+        relatedArtifact = related?.let { // null 체크 추가
+            RelatedArtifactInfo(
+                id = it.reltId,
+                name = it.reltRelicName,
+                museumName = it.reltMuseumFullName
+            )
+        } // related가 null이면 relatedArtifact도 null
     )
 }

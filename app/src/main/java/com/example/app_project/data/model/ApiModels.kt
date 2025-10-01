@@ -33,7 +33,7 @@ data class BriefInfo(
 data class DetailApiResponse(
     val data: DetailData,
     val message: String,
-    val success: Boolean,
+    val success: Boolean, 
     val userId: Int
 )
 

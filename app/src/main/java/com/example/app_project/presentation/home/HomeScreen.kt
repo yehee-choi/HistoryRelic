@@ -152,65 +152,6 @@ private fun TextAnalysisCard(onStartAnalysisClick: () -> Unit) {
     }
 }
 
-//@Composable
-//private fun ExploreArtifactsCard(onExploreArtifactsClick: () -> Unit) {
-//    Card(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .clickable { onExploreArtifactsClick() },
-//        shape = RoundedCornerShape(12.dp),
-//        colors = CardDefaults.cardColors(containerColor = CardColor),
-//        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-//    ) {
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(16.dp),
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            // 아이콘
-//            Box(
-//                modifier = Modifier
-//                    .size(48.dp)
-//                    .clip(RoundedCornerShape(8.dp))
-//                    .background(PrimaryColor.copy(alpha = 0.1f)),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                Icon(
-//                    imageVector = Icons.Default.Museum,
-//                    contentDescription = null,
-//                    tint = PrimaryColor
-//                )
-//            }
-//
-//            Spacer(modifier = Modifier.width(16.dp))
-//
-////            // 텍스트 영역
-////            Column(modifier = Modifier.weight(1f)) {
-////                Text(
-////                    text = "유물 찾아보기",
-////                    fontSize = 16.sp,
-////                    fontWeight = FontWeight.Bold,
-////                    color = TextPrimaryColor
-////                )
-////                Spacer(modifier = Modifier.height(4.dp))
-////                Text(
-////                    text = "엄선된 역사 유물 컬렉션을 탐색하세요.",
-////                    fontSize = 14.sp,
-////                    color = TextSecondaryColor
-////                )
-////            }
-////
-////            // 화살표 아이콘
-////            Icon(
-////                imageVector = Icons.Default.ChevronRight,
-////                contentDescription = null,
-////                tint = TextSecondaryColor
-////            )
-//        }
-//    }
-//}
-
 @Composable
 private fun RecentActivitySection() {
     Column {
@@ -221,23 +162,6 @@ private fun RecentActivitySection() {
             color = TextPrimaryColor
         )
 
-//        Spacer(modifier = Modifier.height(16.dp))
-
-//        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-//            ActivityItem(
-//                icon = Icons.Default.TaskAlt,
-//                iconColor = GreenAccent,
-//                title = "'삼국사기' 분석 완료",
-//                date = "2024년 5월 20일"
-//            )
-//
-//            ActivityItem(
-//                icon = Icons.Default.Visibility,
-//                iconColor = BlueAccent,
-//                title = "유물 조회: 금동미륵보살반가사유상",
-//                date = "2024년 5월 19일"
-//            )
-//        }
     }
 }
 

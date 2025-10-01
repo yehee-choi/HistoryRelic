@@ -136,9 +136,11 @@ fun AppNavigation(
         composable("detail/{artifactId}") { backStackEntry ->
             val artifactId = backStackEntry.arguments?.getString("artifactId") ?: ""
 
-            // 수동으로 ViewModel 생성
+            // artifactId를 key로 사용하여 ID가 바뀔 때마다 새 ViewModel 생성
             val authRepository = remember { AuthRepository(context) }
-            val detailViewModel = remember { DetailViewModel(authRepository) }
+            val detailViewModel = remember(artifactId) { // key 추가
+                DetailViewModel(authRepository)
+            }
 
             // ViewModel 상태 구독
             val artifactDetail by detailViewModel.artifactDetailState.collectAsState()
@@ -147,8 +149,10 @@ fun AppNavigation(
 
             // 화면 진입 시 데이터 로드
             LaunchedEffect(artifactId) {
+                detailViewModel.clearDetailState() // 명시적으로 초기화
                 val token = preferenceManager.getJWTToken()
                 if (token != null) {
+                    Log.d("AppNavigation", "Fetching detail for artifact: $artifactId")
                     detailViewModel.fetchArtifactDetail(artifactId, token)
                 } else {
                     Log.w("AppNavigation", "JWT token is null, cannot fetch artifact detail")
@@ -164,8 +168,11 @@ fun AppNavigation(
                     navController.navigateUp()
                 },
                 onRelatedArtifactClick = { relatedId ->
-                    detailViewModel.clearDetailState()
-                    navController.navigate("detail/${relatedId}")
+                    // 다른 유물로 이동
+                    navController.navigate("detail/${relatedId}") {
+                        // 현재 detail 화면을 백스택에서 제거하고 새로 추가
+                        popUpTo("detail/{artifactId}") { inclusive = true }
+                    }
                 }
             )
 
@@ -174,5 +181,48 @@ fun AppNavigation(
                 Log.e("AppNavigation", "Detail screen error: $error")
             }
         }
+
+//        // 상세 화면 - 단일 정의
+//        composable("detail/{artifactId}") { backStackEntry ->
+//            val artifactId = backStackEntry.arguments?.getString("artifactId") ?: ""
+//
+//            // 수동으로 ViewModel 생성
+//            val authRepository = remember { AuthRepository(context) }
+//            val detailViewModel = remember { DetailViewModel(authRepository) }
+//
+//            // ViewModel 상태 구독
+//            val artifactDetail by detailViewModel.artifactDetailState.collectAsState()
+//            val isLoading by detailViewModel.isLoading.collectAsState()
+//            val errorState by detailViewModel.errorState.collectAsState()
+//
+//            // 화면 진입 시 데이터 로드
+//            LaunchedEffect(artifactId) {
+//                val token = preferenceManager.getJWTToken()
+//                if (token != null) {
+//                    detailViewModel.fetchArtifactDetail(artifactId, token)
+//                } else {
+//                    Log.w("AppNavigation", "JWT token is null, cannot fetch artifact detail")
+//                }
+//            }
+//
+//            // 상세 화면 UI
+//            ArtifactDetailScreen(
+//                artifactDetail = artifactDetail,
+//                isLoading = isLoading,
+//                onBackClick = {
+//                    detailViewModel.clearDetailState()
+//                    navController.navigateUp()
+//                },
+//                onRelatedArtifactClick = { relatedId ->
+//                    detailViewModel.clearDetailState()
+//                    navController.navigate("detail/${relatedId}")
+//                }
+//            )
+//
+//            // 에러 처리 (필요시)
+//            errorState?.let { error ->
+//                Log.e("AppNavigation", "Detail screen error: $error")
+//            }
+//        }
     }
 }
